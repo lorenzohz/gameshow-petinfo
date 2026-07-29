@@ -44,3 +44,38 @@ Após iniciar o servidor, acesse o projeto no navegador através do link:
 
 Se preferir, você pode visualizar o projeto já hospedado acessando:  
 🔗 **[https://cassino-magico.vercel.app](https://cassino-magico.vercel.app)**  
+
+---
+
+# 🎤 Show do Quem Sabe Faz Ao Vivo (PET Informática 2026)
+
+Esta branch adapta o Cassino Mágico para o processo seletivo do PET, com 4 equipes, cartas de buff/debuff e roletas — tudo dentro do próprio site, sem depender de ferramentas externas.
+
+## Fluxo de telas
+
+- `/` — tela de abertura (splash), leva para `/setup`
+- `/setup` — nomeia as 4 equipes (naipes fixos: ♣ Paus, ♥ Copas, ♠ Espadas, ♦ Ouros)
+- `/board` — tabuleiro principal: sorteio de quem começa, roleta de categoria, escolha do valor, fase de cartas e placar
+- `/question` — pergunta em si, com timer (já considerando os multiplicadores das cartas jogadas) e botões de "acertou/errou" operados pelo host
+
+Tudo é controlado manualmente pelo host em uma única tela/projetor (sem timers automáticos fora da resposta), como combinado.
+
+## Como editar as perguntas
+
+Todas as perguntas ficam em `src/app/data.json`, organizadas em 6 categorias (`din`, `jogos`, `musica`, `cinema`, `memes`, `geografia`) × 5 valores (200 a 1000). Os espaços em branco têm `"filled": false` — basta preencher `question`, `answer` (e `image`/`song`/`link` se for o caso) e trocar para `"filled": true`. Enquanto `filled` for `false`, a tela de pergunta mostra um aviso de "pergunta ainda não cadastrada" no lugar do texto.
+
+## Mecânica de cartas (J, Q, K, Coringa)
+
+Cada equipe tem 4 cartas. Ao jogar uma carta, a equipe escolhe o modo:
+- **Buff** (na rodada em que ela mesma vai responder): Valete (roleta de efeito positivo), Dama (fica imune a um debuff), Rei (só uma pessoa responde; acerto vale x3), Coringa (acerto vale x3, erro custa os pontos da pergunta).
+- **Debuff** (jogada por uma equipe adversária contra quem vai responder): Valete (roleta de efeito negativo), Dama (amplifica um debuff já ativo na rodada), Rei (a equipe adversária escolhe quem pode falar, o resto só faz mímica), Coringa (pontuação x2, mas tempo pela metade).
+
+Se a equipe que vai responder acertar, ela recupera aleatoriamente uma das próprias cartas já gastas. Os valores exatos das roletas (multiplicadores, bônus por velocidade, chance de repetir efeito de outra carta) estão documentados e ajustáveis em `src/lib/gameConfig.ts`.
+
+## Rodando localmente
+
+```bash
+npm install
+npm run dev
+```
+

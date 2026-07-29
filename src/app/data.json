@@ -1,204 +1,47 @@
 {
+  "categories": [
+    { "slug": "din", "label": "DIN" },
+    { "slug": "jogos", "label": "Jogos" },
+    { "slug": "musica", "label": "Música" },
+    { "slug": "cinema", "label": "Cinema" },
+    { "slug": "memes", "label": "Memes" },
+    { "slug": "geografia", "label": "Geografia" }
+  ],
   "questions": [
-    {
-      "id": 1,
-      "level": "fácil",
-      "question": "Qual foi o primeiro jogo da Nintendo a apresentar o personagem Mario, lançado em 1981 para fliperamas?",
-      "theme": "jogos",
-      "extra": "Por qual nome ele era conhecido naquela época",
-      "time": 30,
-      "song": null,
-      "image": null
-    },
-    {
-      "id": 2,
-      "level": "médio",
-      "question": "Qual a linguagem de programação mais utilizada para desenvolvimento de jogos atualmente?",
-      "theme": "jogos",
-      "extra": "Qual linguagem de programação, também famosa por sua utilização em desenvolvimento de jogos, foi criada por brasileiros?",
-      "time": 30,
-      "song": null,
-      "image": null
-    },
-    {
-      "id": 3,
-      "level": "difícil",
-      "question": "Qual é o KONAMI Code?",
-      "theme": "jogos",
-      "extra": "No jogo Contra, o que é KONAMI Code fazia?",
-      "time": 60,
-      "song": null,
-      "image": null
-    },
-    {
-      "id": 4,
-      "level": "impossível",
-      "question": "De qual jogo era o primeiro “easter egg” criado na história dos jogos?",
-      "theme": "jogos",
-      "extra": "Para qual console esse jogo foi desenvolvido?",
-      "time": 60,
-      "song": null,
-      "image": null
-    },
-    {
-      "id": 5,
-      "level": "fácil",
-      "question": "Qual é o filme que retrata a história de um matemático britânico, que decifrou o código da máquina Enigma durante a Segunda Guerra Mundial?",
-      "theme": "cinema",
-      "extra": "Qual era o objetivo da máquina Enigma?",
-      "time": 30,
-      "song": null,
-      "image": null
-    },
-    {
-      "id": 6,
-      "level": "médio",
-      "question": "Qual o nome do diretor que criou o filme A Viagem de Chihiro?",
-      "theme": "cinema",
-      "extra": "Qual foi o último filme lançado pelo Studio Ghibli?",
-      "time": 30,
-      "song": null,
-      "image": null
-    },
-    {
-      "id": 7,
-      "level": "difícil",
-      "question": "Qual o primeiro longa-metragem totalmente animado por computador?",
-      "theme": "cinema",
-      "extra": "Qual o nome do urso de pelúcia que aparece em Toy Story 3?",
-      "time": 60,
-      "song": null,
-      "image": null
-    },
-    {
-      "id": 8,
-      "level": "impossível",
-      "question": "Em Ghost in the Shell, o que significa o termo Ghost?",
-      "theme": "cinema",
-      "extra": "Qual é o nome da protagonista de Ghost in the Shell?",
-      "time": 60,
-      "song": null,
-      "image": null
-    },
-    {
-      "id": 9,
-      "level": "fácil",
-      "question": "Qual o significado da abreviação WWW?",
-      "theme": "história",
-      "extra": "Quem inventou o WWW?",
-      "time": 30,
-      "song": null,
-      "image": null
-    },
-    {
-      "id": 10,
-      "level": "médio",
-      "question": "Qual o nome do criador do sistema operacional Linux?",
-      "theme": "história",
-      "extra": "Qual mascote representa o Linux?",
-      "time": 30,
-      "song": null,
-      "image": null
-    },
-    {
-      "id": 11,
-      "level": "difícil",
-      "question": "Qual foi o primeiro sistema operacional criado pela Microsoft?",
-      "theme": "história",
-      "extra": "Qual o significado da sigla MS-DOS?",
-      "time": 60,
-      "song": null,
-      "image": null
-    },
-    {
-      "id": 12,
-      "level": "impossível",
-      "question": "Qual o nome do primeiro computador eletrônico em grande escala criado?",
-      "theme": "história",
-      "extra": "Qual o significado da sigla ENIAC?",
-      "time": 60,
-      "song": null,
-      "image": null
-    },
-    {
-      "id": 13,
-      "level": "fácil",
-      "question": "Qual é o nome da música?",
-      "theme": "música",
-      "song": "/musica1.mp3",
-      "image": null,
-      "extra": "",
-      "time": 30
-    },
-    {
-      "id": 14,
-      "level": "médio",
-      "question": "Qual é o nome da música?",
-      "theme": "música",
-      "song": "/musica2.mp3",
-      "image": null,
-      "extra": "",
-      "time": 30
-    },
-    {
-      "id": 15,
-      "level": "difícil",
-      "question": "Qual é o nome da música?",
-      "theme": "música",
-      "song": "/musica3.mp3",
-      "image": null,
-      "extra": "",
-      "time": 60
-    },
-    {
-      "id": 16,
-      "level": "impossível",
-      "question": "Qual é o nome da música?",
-      "theme": "música",
-      "song": "/musica5.mp3",
-      "image": null,
-      "extra": "",
-      "time": 60
-    },
-    {
-      "id": 17,
-      "level": "fácil",
-      "question": "O enigma de Bernard Werber. Qual a próxima sequência da pirâmide?",
-      "theme": "enigmas",
-      "song": null,
-      "image": "/enigma1.png",
-      "extra": "",
-      "time": 60
-    },
-    {
-      "id": 18,
-      "level": "médio",
-      "question": "Abaixo vemos 3 equações horizontais e 1 vertical. Realoque os números para solucionar as equações.",
-      "theme": "enigmas",
-      "song": null,
-      "image": "/enigma2.png",
-      "extra": "",
-      "time": 120
-    },
-    {
-      "id": 19,
-      "level": "difícil",
-      "question": "Remova 9 palitos desta figura, de forma que não sobre nenhum quadrado",
-      "theme": "enigmas",
-      "song": null,
-      "image": "/enigma3.png",
-      "extra": "",
-      "time": 120
-    },
-    {
-      "id": 20,
-      "level": "impossível",
-      "question": "Encontre o próximo número da seguinte sequência e justifique 8 1 7 6 2 8 9 1 _",
-      "theme": "enigmas",
-      "song": null,
-      "image": null,
-      "extra": "",
-      "time": 120
-    }
+    { "id": 1, "category": "din", "points": 200, "question": "", "answer": "", "extra": "", "time": 20, "song": null, "image": null, "link": null, "filled": false },
+    { "id": 2, "category": "din", "points": 400, "question": "", "answer": "", "extra": "", "time": 25, "song": null, "image": null, "link": null, "filled": false },
+    { "id": 3, "category": "din", "points": 600, "question": "", "answer": "", "extra": "", "time": 30, "song": null, "image": null, "link": null, "filled": false },
+    { "id": 4, "category": "din", "points": 800, "question": "", "answer": "", "extra": "", "time": 40, "song": null, "image": null, "link": null, "filled": false },
+    { "id": 5, "category": "din", "points": 1000, "question": "Qual jacoposter está colado até hoje no departamento?", "answer": "Jacoamor", "extra": "", "time": 50, "song": null, "image": null, "link": null, "filled": true },
+
+    { "id": 6, "category": "jogos", "points": 200, "question": "", "answer": "", "extra": "", "time": 20, "song": null, "image": null, "link": null, "filled": false },
+    { "id": 7, "category": "jogos", "points": 400, "question": "", "answer": "", "extra": "", "time": 25, "song": null, "image": null, "link": null, "filled": false },
+    { "id": 8, "category": "jogos", "points": 600, "question": "", "answer": "", "extra": "", "time": 30, "song": null, "image": null, "link": null, "filled": false },
+    { "id": 9, "category": "jogos", "points": 800, "question": "", "answer": "", "extra": "", "time": 40, "song": null, "image": null, "link": null, "filled": false },
+    { "id": 10, "category": "jogos", "points": 1000, "question": "", "answer": "", "extra": "", "time": 50, "song": null, "image": null, "link": null, "filled": false },
+
+    { "id": 11, "category": "musica", "points": 200, "question": "Qual é o nome da música?", "answer": "", "extra": "", "time": 20, "song": null, "image": null, "link": null, "filled": false },
+    { "id": 12, "category": "musica", "points": 400, "question": "Qual é o nome da música?", "answer": "", "extra": "", "time": 25, "song": null, "image": null, "link": null, "filled": false },
+    { "id": 13, "category": "musica", "points": 600, "question": "Qual é o nome da música?", "answer": "", "extra": "", "time": 30, "song": null, "image": null, "link": null, "filled": false },
+    { "id": 14, "category": "musica", "points": 800, "question": "Qual é o nome da música?", "answer": "", "extra": "", "time": 40, "song": null, "image": null, "link": null, "filled": false },
+    { "id": 15, "category": "musica", "points": 1000, "question": "Qual é o nome da música?", "answer": "", "extra": "", "time": 50, "song": null, "image": null, "link": null, "filled": false },
+
+    { "id": 16, "category": "cinema", "points": 200, "question": "", "answer": "", "extra": "", "time": 20, "song": null, "image": null, "link": null, "filled": false },
+    { "id": 17, "category": "cinema", "points": 400, "question": "", "answer": "", "extra": "", "time": 25, "song": null, "image": null, "link": null, "filled": false },
+    { "id": 18, "category": "cinema", "points": 600, "question": "", "answer": "", "extra": "", "time": 30, "song": null, "image": null, "link": null, "filled": false },
+    { "id": 19, "category": "cinema", "points": 800, "question": "", "answer": "", "extra": "", "time": 40, "song": null, "image": null, "link": null, "filled": false },
+    { "id": 20, "category": "cinema", "points": 1000, "question": "", "answer": "", "extra": "", "time": 50, "song": null, "image": null, "link": null, "filled": false },
+
+    { "id": 21, "category": "memes", "points": 200, "question": "Quem é Triple T?", "answer": "Tung Tung Tung Sahur", "extra": "", "time": 20, "song": null, "image": null, "link": null, "filled": true },
+    { "id": 22, "category": "memes", "points": 400, "question": "O que caiu em cima da Giovanna?", "answer": "O forninho", "extra": "", "time": 25, "song": null, "image": null, "link": null, "filled": true },
+    { "id": 23, "category": "memes", "points": 600, "question": "Qual o melhor meme do mundo?", "answer": "Trollface", "extra": "", "time": 30, "song": null, "image": null, "link": "https://youtu.be/Dhxv4qHcGx4", "filled": true },
+    { "id": 24, "category": "memes", "points": 800, "question": "", "answer": "", "extra": "", "time": 40, "song": null, "image": null, "link": null, "filled": false },
+    { "id": 25, "category": "memes", "points": 1000, "question": "", "answer": "", "extra": "", "time": 50, "song": null, "image": null, "link": null, "filled": false },
+
+    { "id": 26, "category": "geografia", "points": 200, "question": "", "answer": "", "extra": "", "time": 20, "song": null, "image": null, "link": null, "filled": false },
+    { "id": 27, "category": "geografia", "points": 400, "question": "", "answer": "", "extra": "", "time": 25, "song": null, "image": null, "link": null, "filled": false },
+    { "id": 28, "category": "geografia", "points": 600, "question": "", "answer": "", "extra": "", "time": 30, "song": null, "image": null, "link": null, "filled": false },
+    { "id": 29, "category": "geografia", "points": 800, "question": "", "answer": "", "extra": "", "time": 40, "song": null, "image": null, "link": null, "filled": false },
+    { "id": 30, "category": "geografia", "points": 1000, "question": "", "answer": "", "extra": "", "time": 50, "song": null, "image": null, "link": null, "filled": false }
   ]
 }

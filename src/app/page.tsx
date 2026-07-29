@@ -11,7 +11,7 @@ export default function Home() {
   const handleClick = () => {
     setIsSelected(true); // Ativa a animação
     setTimeout(() => {
-      router.push("/home"); // Redireciona após um delay
+      router.push("/setup"); // Redireciona após um delay
     }, 2000); // Delay de 2 segundos (tempo da animação)
   };
 

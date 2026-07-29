@@ -10,7 +10,7 @@ export default function TimeOver() {
       {/* Botão de voltar */}
       <div
         className="absolute top-5 left-5 w-[100px] h-[50px] bg-[#800000] hexagon-button flex justify-center items-center cursor-pointer transition-transform duration-300 ease-in-out hover:scale-125 hover:shadow-xl active:scale-110"
-        onClick={() => router.push("/home")}
+        onClick={() => router.push("/board")}
       ></div>
 
       <div className="flex flex-col w-full justify-center items-center h-[600px] mx-60 bg-beige rounded-xl">
