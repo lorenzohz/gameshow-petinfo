@@ -68,16 +68,16 @@ export default function RouletteSpinner({
 
   return (
     <div className="flex flex-col items-center gap-6">
-      {title && <p className="text-golden text-3xl">{title}</p>}
+      {title && <p className="font-display text-blue-deepest text-2xl text-center">{title}</p>}
       <div
-        className={`px-10 py-8 rounded-xl bg-darkbrown border-4 ${
-          done ? "border-golden" : "border-beige/40"
-        } text-beige text-4xl font-bold text-center min-w-[420px] transition-colors duration-300`}
+        className={`px-8 py-7 rounded-2xl bg-blue-deepest border-4 ${
+          done ? "border-blue-light shadow-stage" : "border-blue-dark"
+        } text-white text-2xl md:text-3xl font-display text-center min-w-[280px] md:min-w-[420px] transition-colors duration-300`}
       >
         {items[displayIndex]?.label}
       </div>
       {done && result && (
-        <p className="text-golden text-2xl animate-pulse">Resultado sorteado!</p>
+        <p className="font-display text-blue-primary text-xl animate-pulse">Resultado sorteado!</p>
       )}
     </div>
   );

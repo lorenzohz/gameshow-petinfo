@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useGame } from "../../context/GameContext";
 import { getQuestionById } from "../../lib/gameReducer";
-import "../globals.css";
+import { getYoutubeEmbedUrl } from "../../lib/youtube";
 
 export default function QuestionPage() {
   const { state, dispatch, hydrated } = useGame();
@@ -20,6 +20,7 @@ export default function QuestionPage() {
   const initializedRef = useRef(false);
 
   const question = state.currentQuestionId ? getQuestionById(state.currentQuestionId) : null;
+  const youtubeEmbedUrl = question?.link ? getYoutubeEmbedUrl(question.link) : null;
 
   const timeMultiplier = state.activeEffects.reduce((m, e) => m * (e.timeMultiplier ?? 1), 1);
   const scoreMultiplier = state.activeEffects.reduce((m, e) => m * (e.scoreMultiplier ?? 1), 1);
@@ -47,11 +48,11 @@ export default function QuestionPage() {
 
   if (!question) {
     return (
-      <div className="flex flex-col items-center justify-center h-full gap-6">
-        <p className="text-beige text-2xl">Nenhuma pergunta selecionada.</p>
+      <div className="min-h-screen w-full flex flex-col items-center justify-center gap-6">
+        <p className="font-body text-ink text-xl">Nenhuma pergunta selecionada.</p>
         <button
           onClick={() => router.push("/board")}
-          className="bg-golden text-darkbrown font-bold px-6 py-3 rounded-lg"
+          className="font-display bg-blue-primary text-white px-6 py-3 rounded-full"
         >
           Voltar ao tabuleiro
         </button>
@@ -79,120 +80,150 @@ export default function QuestionPage() {
   };
 
   return (
-    <div className="flex flex-col gap-8 py-6">
-      <div
-        className="absolute top-5 left-5 w-[100px] h-[50px] bg-[#800000] hexagon-button flex justify-center items-center cursor-pointer transition-transform duration-300 ease-in-out hover:scale-125 hover:shadow-xl active:scale-110"
-        onClick={() => router.push("/board")}
-      ></div>
-
-      <h1 className="text-golden p-6 text-6xl text-center">
-        {question.points} PTS — {question.category.toUpperCase()}
-      </h1>
-
-      <div className="flex flex-col justify-between min-h-[500px] bg-beige mx-40 rounded-xl">
-        <p className="text-brown font-semibold text-4xl p-10 text-center">
-          {question.filled ? question.question : "⚠️ Pergunta ainda não cadastrada — edite data.json"}
-        </p>
-
-        {question.link && (
-          <p className="text-center text-blue-800 underline text-2xl pb-4">
-            <a href={question.link} target="_blank" rel="noreferrer">
-              {question.link}
-            </a>
-          </p>
-        )}
-
-        {question.image && (
-          <div className="flex justify-center pb-6">
-            <Image src={question.image} alt="Imagem da pergunta" width={300} height={300} />
-          </div>
-        )}
-
-        {question.song && (
-          <div className="text-brown text-3xl p-10 text-center">
-            <button
-              onClick={togglePlay}
-              className="px-6 py-3 bg-golden text-white rounded-lg hover:bg-yellow-600"
-            >
-              {isPlaying ? "Pausar Música" : "Tocar Música"}
-            </button>
-            <audio ref={audioRef} src={question.song} />
-          </div>
-        )}
-
-        <p className="text-brown text-3xl p-8 text-center">
-          TEMPO: {timeLeft ?? question.time} SEG
-          {timeMultiplier !== 1 && (
-            <span className="text-lg block text-brown/70">
-              (base {question.time}s × {timeMultiplier.toFixed(2)})
+    <div className="min-h-screen w-full flex flex-col items-center">
+      <main className="w-full max-w-4xl flex flex-col gap-8 px-4 sm:px-6 pt-8 pb-10">
+        <div className="stage-card bg-white flex flex-col justify-between min-h-[420px] w-full border-4 border-blue-primary/20">
+          <div className="flex flex-col items-center gap-1 pt-8">
+            <span className="font-body uppercase tracking-[0.25em] text-blue-primary text-xs">
+              {question.category.toUpperCase()}
             </span>
-          )}
-        </p>
+            <h1 className="font-display text-blue-deepest text-3xl">{question.points} PTS</h1>
+          </div>
 
-        {showAnswer && question.filled && (
-          <p className="text-emerald-700 text-3xl text-center pb-8 font-bold">
-            Resposta: {question.answer}
+          <p className="font-display text-ink text-2xl md:text-4xl p-8 md:p-10 text-center">
+            {question.filled ? question.question : "⚠️ Pergunta ainda não cadastrada — edite data.json"}
+          </p>
+
+          {question.image && (
+            <div className="flex justify-center pb-6">
+              <Image src={question.image} alt="Imagem da pergunta" width={300} height={300} />
+            </div>
+          )}
+
+          {question.song && (
+            <div className="text-center pb-8">
+              <button
+                onClick={togglePlay}
+                className="font-display px-6 py-3 bg-blue-primary text-white rounded-full hover:bg-blue-light transition-colors"
+              >
+                {isPlaying ? "Pausar Música" : "Tocar Música"}
+              </button>
+              <audio ref={audioRef} src={question.song} />
+            </div>
+          )}
+
+          <div className="bg-blue-deepest rounded-b-2xl py-6 px-8 text-center">
+            <p className="font-display text-white text-3xl">
+              TEMPO: {timeLeft ?? question.time} SEG
+            </p>
+            {timeMultiplier !== 1 && (
+              <span className="font-body text-sm block text-white/70">
+                (base {question.time}s × {timeMultiplier.toFixed(2)})
+              </span>
+            )}
+          </div>
+
+          {showAnswer && question.filled && (
+            <div className="flex flex-col items-center gap-4 py-6 px-4 sm:px-8">
+              <p className="font-display text-emerald-600 text-2xl text-center">
+                Resposta: {question.answer}
+              </p>
+
+              {question.link && (
+                youtubeEmbedUrl ? (
+                  <div className="w-full max-w-lg aspect-video rounded-xl overflow-hidden shadow-card">
+                    <iframe
+                      className="w-full h-full"
+                      src={youtubeEmbedUrl}
+                      title="Vídeo da resposta"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </div>
+                ) : (
+                  <a
+                    href={question.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-blue-primary underline text-lg"
+                  >
+                    {question.link}
+                  </a>
+                )
+              )}
+            </div>
+          )}
+        </div>
+
+        {state.activeEffects.length > 0 && (
+          <div className="stage-card bg-white p-4 flex flex-col gap-1">
+            {state.activeEffects.map((e) => (
+              <p key={e.id} className="font-body text-ink/70 text-sm">
+                • {e.label}
+              </p>
+            ))}
+            {scoreMultiplier !== 1 && (
+              <p className="font-body text-blue-primary text-sm font-semibold">
+                Multiplicador de pontuação total: x{scoreMultiplier.toFixed(2)}
+              </p>
+            )}
+            {jokerBuffActive && (
+              <p className="font-body text-blue-primary text-sm font-semibold">
+                Coringa ativo: acerto vale x3, erro custa os pontos da pergunta.
+              </p>
+            )}
+          </div>
+        )}
+
+        {soloKingActive && (
+          <div className="flex items-center gap-3 justify-center">
+            <input
+              id="solo"
+              type="checkbox"
+              checked={soloConfirmed}
+              onChange={(e) => setSoloConfirmed(e.target.checked)}
+              className="w-5 h-5 accent-blue-primary"
+            />
+            <label htmlFor="solo" className="font-body text-ink text-base">
+              O &quot;Rei&quot; respondeu sozinho, sem ajuda (aplica x3 se acertar)
+            </label>
+          </div>
+        )}
+
+        <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <button
+            onClick={() => setShowAnswer((s) => !s)}
+            className="font-body px-6 py-3 rounded-full border-2 border-blue-primary text-blue-primary hover:bg-blue-primary hover:text-white transition-colors"
+          >
+            {showAnswer ? "Esconder resposta" : "Ver resposta na tela"}
+          </button>
+          <button
+            onClick={() => resolve(true)}
+            className="font-display px-8 py-3 rounded-full bg-emerald-600 text-white hover:scale-105 transition-transform"
+          >
+            Equipe acertou
+          </button>
+          <button
+            onClick={() => resolve(false)}
+            className="font-display px-8 py-3 rounded-full bg-red-600 text-white hover:scale-105 transition-transform"
+          >
+            Equipe errou
+          </button>
+        </div>
+
+        {timeLeft === 0 && (
+          <p className="text-center font-body text-red-600 text-lg">
+            Tempo esgotado! Use os botões acima para confirmar o resultado.
           </p>
         )}
-      </div>
 
-      {state.activeEffects.length > 0 && (
-        <div className="mx-40 bg-darkbrown/60 rounded-lg p-4 flex flex-col gap-1">
-          {state.activeEffects.map((e) => (
-            <p key={e.id} className="text-beige text-sm">
-              • {e.label}
-            </p>
-          ))}
-          {scoreMultiplier !== 1 && (
-            <p className="text-golden text-sm">Multiplicador de pontuação total: x{scoreMultiplier.toFixed(2)}</p>
-          )}
-          {jokerBuffActive && (
-            <p className="text-golden text-sm">Coringa ativo: acerto vale x3, erro custa os pontos da pergunta.</p>
-          )}
-        </div>
-      )}
-
-      {soloKingActive && (
-        <div className="mx-40 flex items-center gap-3 justify-center">
-          <input
-            id="solo"
-            type="checkbox"
-            checked={soloConfirmed}
-            onChange={(e) => setSoloConfirmed(e.target.checked)}
-            className="w-5 h-5"
-          />
-          <label htmlFor="solo" className="text-beige text-lg">
-            O &quot;Rei&quot; respondeu sozinho, sem ajuda (aplica x3 se acertar)
-          </label>
-        </div>
-      )}
-
-      <div className="flex justify-center gap-6">
         <button
-          onClick={() => setShowAnswer((s) => !s)}
-          className="px-6 py-3 rounded-lg border border-golden text-golden hover:bg-golden hover:text-darkbrown"
+          onClick={() => router.push("/board")}
+          className="self-center font-body text-xs text-ink/40 hover:text-ink/70 underline underline-offset-2 mt-2"
         >
-          {showAnswer ? "Esconder resposta" : "Mostrar resposta ao host"}
+          ← voltar ao tabuleiro
         </button>
-        <button
-          onClick={() => resolve(true)}
-          className="px-8 py-3 rounded-lg bg-emerald-700 text-beige font-bold hover:scale-105 transition-transform"
-        >
-          Equipe acertou
-        </button>
-        <button
-          onClick={() => resolve(false)}
-          className="px-8 py-3 rounded-lg bg-red-800 text-beige font-bold hover:scale-105 transition-transform"
-        >
-          Equipe errou
-        </button>
-      </div>
-
-      {timeLeft === 0 && (
-        <p className="text-center text-red-400 text-2xl">
-          Tempo esgotado! Use os botões acima para confirmar o resultado.
-        </p>
-      )}
+      </main>
     </div>
   );
 }

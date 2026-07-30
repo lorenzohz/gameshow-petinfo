@@ -5,10 +5,12 @@ import { useGame } from "../../context/GameContext";
 import BoardGrid from "../../components/BoardGrid";
 import TeamPanel from "../../components/TeamPanel";
 import CardPhasePanel from "../../components/CardPhasePanel";
-import RouletteSpinner from "../../components/RouletteSpinner";
+import RouletteWheel from "../../components/RouletteWheel";
+import RouletteOverlay from "../../components/RouletteOverlay";
 import { CATEGORIES } from "../../lib/gameConfig";
 import { getAvailableCategories } from "../../lib/gameReducer";
-import "../globals.css";
+
+const BIG_WHEEL = "w-[78vmin] h-[78vmin] max-w-[620px] max-h-[620px]";
 
 export default function BoardPage() {
   const { state, dispatch, hydrated } = useGame();
@@ -18,7 +20,7 @@ export default function BoardPage() {
 
   useEffect(() => {
     if (hydrated && state.phase === "setup") {
-      router.push("/setup");
+      router.push("/");
     }
   }, [hydrated, state.phase, router]);
 
@@ -30,64 +32,79 @@ export default function BoardPage() {
   const handleReset = () => {
     if (confirm("Isso vai zerar todo o placar e as cartas. Continuar?")) {
       dispatch({ type: "RESET_GAME" });
-      router.push("/setup");
+      router.push("/");
     }
   };
 
   return (
-    <div className="flex flex-col h-full w-full gap-6 py-6 px-6">
-      <div className="flex justify-between items-center">
-        <h1 className="text-golden text-4xl">Show do Quem Sabe Faz Ao Vivo</h1>
-        <button
-          onClick={handleReset}
-          className="text-beige/60 text-sm border border-beige/30 px-3 py-1 rounded hover:bg-beige/10"
-        >
-          Resetar jogo
-        </button>
-      </div>
+    <div className="min-h-screen w-full flex flex-col items-center">
+      <main className="w-full max-w-6xl flex flex-col items-center gap-6 px-4 sm:px-6 pt-8 pb-10">
+        <div className="flex justify-center gap-4 flex-wrap w-full">
+          {state.order.map((id) => {
+            const team = state.teams.find((t) => t.id === id)!;
+            return <TeamPanel key={id} team={team} active={id === currentTeamId} />;
+          })}
+        </div>
 
-      <div className="flex justify-center gap-6 flex-wrap">
-        {state.order.map((id) => {
-          const team = state.teams.find((t) => t.id === id)!;
-          return <TeamPanel key={id} team={team} active={id === currentTeamId} />;
-        })}
-      </div>
-
-      {state.phase === "draw-start" && (
-        <div className="flex flex-col items-center gap-6 mt-10">
-          <p className="text-beige text-2xl">Sorteando quem começa a partida...</p>
-          {!drawing && (
+        {state.phase === "draw-start" && (
+          <section className="w-full max-w-2xl flex flex-col items-center gap-6 stage-card bg-white p-8 sm:p-12 border-4 border-blue-primary/20">
+            <span className="font-body uppercase tracking-[0.25em] text-blue-primary text-xs">
+              Sorteio inicial
+            </span>
+            <p className="font-display text-blue-deepest text-2xl text-center">
+              Quem começa a partida?
+            </p>
             <button
               onClick={() => setDrawing(true)}
-              className="bg-golden text-darkbrown font-bold text-xl px-8 py-3 rounded-xl hover:scale-105 transition-transform"
+              className="font-display bg-blue-primary text-white text-xl px-10 py-4 rounded-full hover:scale-105 transition-transform shadow-card"
             >
-              Girar sorteio
+              Girar roleta
             </button>
-          )}
-          {drawing && (
-            <RouletteSpinner
-              items={state.teams.map((t) => ({ id: t.id, label: `${t.naipe} ${t.name}`, weight: 1 }))}
-              onFinish={(opt) => dispatch({ type: "DRAW_STARTING_TEAM", teamId: opt.id })}
-            />
-          )}
-        </div>
-      )}
+          </section>
+        )}
 
-      {state.phase === "spin-category" && currentTeam && (
-        <div className="flex flex-col items-center gap-6 mt-6">
-          <p className="text-beige text-2xl">
-            Vez de {currentTeam.naipe} {currentTeam.name} — girando a categoria...
-          </p>
-          {!spinningCategory && (
+        {drawing && (
+          <RouletteOverlay>
+            <RouletteWheel
+              wrapperClassName={BIG_WHEEL}
+              items={state.teams.map((t) => ({
+                id: t.id,
+                label: `${t.naipe} ${t.name}`,
+                weight: 1,
+                color: t.color,
+              }))}
+              onFinish={(opt) => {
+                dispatch({ type: "DRAW_STARTING_TEAM", teamId: opt.id });
+                setDrawing(false);
+              }}
+            />
+          </RouletteOverlay>
+        )}
+
+        {state.phase === "spin-category" && currentTeam && (
+          <section
+            className="w-full max-w-2xl flex flex-col items-center gap-6 stage-card bg-white p-8 sm:p-12 border-4"
+            style={{ borderColor: `${currentTeam.color}40` }}
+          >
+            <span className="font-body uppercase tracking-[0.25em] text-xs" style={{ color: currentTeam.color }}>
+              Vez de {currentTeam.naipe} {currentTeam.name}
+            </span>
+            <p className="font-display text-blue-deepest text-2xl text-center">
+              Qual será a categoria?
+            </p>
             <button
               onClick={() => setSpinningCategory(true)}
-              className="bg-golden text-darkbrown font-bold text-xl px-8 py-3 rounded-xl hover:scale-105 transition-transform"
+              className="font-display bg-blue-primary text-white text-xl px-10 py-4 rounded-full hover:scale-105 transition-transform shadow-card"
             >
               Girar roleta de tema
             </button>
-          )}
-          {spinningCategory && (
-            <RouletteSpinner
+          </section>
+        )}
+
+        {spinningCategory && (
+          <RouletteOverlay>
+            <RouletteWheel
+              wrapperClassName={BIG_WHEEL}
               items={getAvailableCategories(state.board).map((slug) => ({
                 id: slug,
                 label: CATEGORIES.find((c) => c.slug === slug)?.label || slug,
@@ -98,64 +115,82 @@ export default function BoardPage() {
                 setSpinningCategory(false);
               }}
             />
-          )}
-        </div>
-      )}
+          </RouletteOverlay>
+        )}
 
-      {state.phase === "pick-question" && currentTeam && (
-        <div className="flex flex-col items-center gap-2 mt-6">
-          <p className="text-beige text-2xl">
-            {currentTeam.naipe} {currentTeam.name}, escolha o valor da pergunta em{" "}
-            <span className="text-golden">
-              {CATEGORIES.find((c) => c.slug === state.currentCategory)?.label}
+        {state.phase === "pick-question" && currentTeam && (
+          <section className="w-full flex flex-col items-center gap-2">
+            <span className="font-body uppercase tracking-[0.25em] text-xs" style={{ color: currentTeam.color }}>
+              {currentTeam.naipe} {currentTeam.name}
             </span>
-          </p>
-        </div>
-      )}
+            <p className="font-display text-blue-deepest text-2xl md:text-3xl text-center">
+              Escolha o valor em{" "}
+              <span className="text-blue-primary">
+                {CATEGORIES.find((c) => c.slug === state.currentCategory)?.label}
+              </span>
+            </p>
+          </section>
+        )}
 
-      {state.phase === "card-phase" && (
-        <CardPhasePanel
-          state={state}
-          dispatch={dispatch}
-          onProceed={() => router.push("/question")}
-        />
-      )}
+        {state.phase === "card-phase" && (
+          <CardPhasePanel
+            state={state}
+            dispatch={dispatch}
+            onProceed={() => router.push("/question")}
+          />
+        )}
 
-      {state.phase === "answering" && (
-        <div className="flex flex-col items-center gap-6 mt-10">
-          <p className="text-beige text-2xl">A pergunta está em andamento.</p>
-          <button
-            onClick={() => router.push("/question")}
-            className="bg-golden text-darkbrown font-bold text-xl px-8 py-3 rounded-xl hover:scale-105 transition-transform"
-          >
-            Ir para a pergunta
-          </button>
-        </div>
-      )}
+        {state.phase === "answering" && (
+          <section className="w-full max-w-2xl flex flex-col items-center gap-6 stage-card bg-white p-10">
+            <p className="font-body text-ink text-xl text-center">A pergunta está em andamento.</p>
+            <button
+              onClick={() => router.push("/question")}
+              className="font-display bg-blue-primary text-white text-xl px-8 py-3 rounded-full hover:scale-105 transition-transform"
+            >
+              Ir para a pergunta
+            </button>
+          </section>
+        )}
 
-      {(state.phase === "spin-category" || state.phase === "pick-question") && (
-        <BoardGrid
-          board={state.board}
-          activeCategory={state.phase === "pick-question" ? state.currentCategory : null}
-          clickable={state.phase === "pick-question"}
-          onPick={(cell) => dispatch({ type: "PICK_QUESTION", questionId: cell.id })}
-        />
-      )}
+        {(state.phase === "spin-category" || state.phase === "pick-question") && (
+          <BoardGrid
+            board={state.board}
+            activeCategory={state.phase === "pick-question" ? state.currentCategory : null}
+            clickable={state.phase === "pick-question"}
+            spotlight={state.phase === "pick-question"}
+            onPick={(cell) => dispatch({ type: "PICK_QUESTION", questionId: cell.id })}
+          />
+        )}
 
-      {state.phase === "finished" && (
-        <div className="flex flex-col items-center gap-6 mt-10">
-          <h2 className="text-golden text-5xl">Fim de jogo!</h2>
-          <div className="flex flex-col gap-2 text-beige text-2xl">
-            {[...state.teams]
-              .sort((a, b) => b.score - a.score)
-              .map((t, idx) => (
-                <p key={t.id}>
-                  {idx + 1}º — {t.naipe} {t.name}: {t.score} pts
-                </p>
-              ))}
-          </div>
-        </div>
-      )}
+        {state.phase === "finished" && (
+          <section className="w-full max-w-2xl flex flex-col items-center gap-6 stage-card bg-white p-10">
+            <h2 className="font-display text-blue-deepest text-4xl text-center">Fim de jogo!</h2>
+            <div className="flex flex-col gap-3 w-full">
+              {[...state.teams]
+                .sort((a, b) => b.score - a.score)
+                .map((t, idx) => (
+                  <div
+                    key={t.id}
+                    className="flex justify-between items-center rounded-xl px-5 py-3"
+                    style={{ backgroundColor: `${t.color}1a` }}
+                  >
+                    <span className="font-display text-lg" style={{ color: t.color }}>
+                      {idx + 1}º — {t.naipe} {t.name}
+                    </span>
+                    <span className="font-display text-xl text-ink">{t.score} pts</span>
+                  </div>
+                ))}
+            </div>
+          </section>
+        )}
+
+        <button
+          onClick={handleReset}
+          className="font-body text-xs text-ink/40 hover:text-ink/70 underline underline-offset-2 mt-4"
+        >
+          resetar jogo
+        </button>
+      </main>
     </div>
   );
 }

@@ -6,29 +6,40 @@ export default function BoardGrid({
   board,
   activeCategory,
   clickable,
+  spotlight,
   onPick,
 }: {
   board: BoardCell[];
   activeCategory: string | null;
   clickable: boolean;
+  spotlight?: boolean;
   onPick?: (cell: BoardCell) => void;
 }) {
   return (
-    <div className="grid grid-cols-6 gap-3 w-full">
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 w-full">
       {CATEGORIES.map((cat) => {
         const isActive = activeCategory === cat.slug;
+        const emphasize = spotlight && isActive;
         return (
           <div
             key={cat.slug}
-            className={`flex flex-col items-center gap-3 p-3 rounded-lg transition-colors ${
+            className={`flex flex-col items-center gap-2 p-3 rounded-2xl transition-all duration-300 ${
               activeCategory
                 ? isActive
-                  ? "bg-golden/20"
-                  : "opacity-40"
+                  ? emphasize
+                    ? "bg-white stage-card border-4 border-blue-primary scale-110 z-10"
+                    : "bg-blue-primary/10 stage-card"
+                  : `opacity-30 ${spotlight ? "scale-90 blur-[1px]" : ""}`
                 : ""
             }`}
           >
-            <h4 className="text-beige text-xl text-center">{cat.label}</h4>
+            <h4
+              className={`font-display text-blue-deepest text-center ${
+                emphasize ? "text-lg md:text-xl" : "text-sm md:text-base"
+              }`}
+            >
+              {cat.label}
+            </h4>
             {POINTS_VALUES.map((pts) => {
               const cell = board.find(
                 (c) => c.category === cat.slug && c.points === pts
@@ -41,12 +52,14 @@ export default function BoardGrid({
                   key={cell.id}
                   disabled={disabled}
                   onClick={() => onPick && onPick(cell)}
-                  className={`w-24 h-14 clip-hexagon flex items-center justify-center font-bold text-lg transition-transform ${
+                  className={`w-full rounded-xl font-display transition-all ${
+                    emphasize ? "h-16 text-2xl" : "h-12 text-base"
+                  } ${
                     cell.answered
-                      ? "bg-darkbrown text-beige/20 cursor-not-allowed"
+                      ? "bg-ink/5 text-ink/20 cursor-not-allowed"
                       : disabled
-                      ? "bg-gradient-to-b from-white to-beige text-darkbrown/50 cursor-default"
-                      : "bg-gradient-to-b from-white to-beige text-darkbrown hover:scale-105 cursor-pointer"
+                      ? "bg-blue-primary/40 text-white/70 cursor-default"
+                      : "bg-blue-primary text-white shadow-card hover:scale-105 hover:bg-blue-light cursor-pointer"
                   }`}
                 >
                   {cell.answered ? "✓" : pts}

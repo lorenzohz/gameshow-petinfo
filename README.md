@@ -53,12 +53,19 @@ Esta branch adapta o Cassino Mágico para o processo seletivo do PET, com 4 equi
 
 ## Fluxo de telas
 
-- `/` — tela de abertura (splash), leva para `/setup`
-- `/setup` — nomeia as 4 equipes (naipes fixos: ♣ Paus, ♥ Copas, ♠ Espadas, ♦ Ouros)
+- `/` — configuração das equipes (nomeia as 4 equipes; naipes fixos: ♣ Paus, ♥ Copas, ♠ Espadas, ♦ Ouros). Não existe mais splash screen.
 - `/board` — tabuleiro principal: sorteio de quem começa, roleta de categoria, escolha do valor, fase de cartas e placar
 - `/question` — pergunta em si, com timer (já considerando os multiplicadores das cartas jogadas) e botões de "acertou/errou" operados pelo host
 
 Tudo é controlado manualmente pelo host em uma única tela/projetor (sem timers automáticos fora da resposta), como combinado.
+
+## Identidade visual
+
+Paleta em `tailwind.config.ts`: fundo off-white (`offwhite`), texto preto (`ink`) e azuis de destaque (`blue-deepest #10316b`, `blue-dark #214179`, `blue-primary #1961a5`, `blue-light #3788d1`), usados em cabeçalhos, botões e roletas com gradiente (classe `stage-gradient`). As 4 equipes têm cores próprias e variadas para se distinguirem do azul principal (verde, vermelho, roxo, âmbar) — em `src/lib/gameConfig.ts`, no array `DEFAULT_TEAMS`.
+
+Tipografia: **Anton** para títulos/pontuações (efeito "placar de TV") e **Montserrat** para o resto do texto — ambas carregadas em `src/app/layout.tsx`.
+
+As células do tabuleiro deixaram de ser hexágonos e viraram cards retangulares com cantos arredondados (classe utilitária `.stage-card` em `globals.css`).
 
 ## Como editar as perguntas
 

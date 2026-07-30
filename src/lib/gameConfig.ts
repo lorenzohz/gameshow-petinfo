@@ -12,10 +12,10 @@ export const CARD_LABELS: Record<CardType, string> = {
 };
 
 export const DEFAULT_TEAMS: Omit<Team, "score" | "cards" | "immuneNextDebuff">[] = [
-  { id: "paus", naipe: "♣", name: "Equipe Paus", color: "#2f7a4f" },
-  { id: "copas", naipe: "♥", name: "Equipe Copas", color: "#b3273b" },
-  { id: "espadas", naipe: "♠", name: "Equipe Espadas", color: "#2b3a67" },
-  { id: "ouros", naipe: "♦", name: "Equipe Ouros", color: "#c9861f" },
+  { id: "paus", naipe: "♣", name: "Equipe Paus", color: "#1f9d55" },
+  { id: "copas", naipe: "♥", name: "Equipe Copas", color: "#e0473f" },
+  { id: "espadas", naipe: "♠", name: "Equipe Espadas", color: "#7c3aed" },
+  { id: "ouros", naipe: "♦", name: "Equipe Ouros", color: "#f2994a" },
 ];
 
 export function makeInitialCards() {
