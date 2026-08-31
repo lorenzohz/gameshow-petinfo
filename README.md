@@ -49,13 +49,13 @@ Se preferir, você pode visualizar o projeto já hospedado acessando:
 
 # 🎤 Show do Quem Sabe Faz Ao Vivo (PET Informática 2026)
 
-Esta branch adapta o Cassino Mágico para o processo seletivo do PET, com 4 equipes, cartas de buff/debuff e roletas — tudo dentro do próprio site, sem depender de ferramentas externas.
+Esta branch adapta o Cassino Mágico para o processo seletivo do PET, com 4 equipes e roletas — tudo dentro do próprio site, sem depender de ferramentas externas. É um gameshow de perguntas e respostas tradicional (estilo Jeopardy): categorias, valores, timer e "acertou/errou" — sem cartas de poder.
 
 ## Fluxo de telas
 
 - `/` — configuração das equipes (nomeia as 4 equipes; naipes fixos: ♣ Paus, ♥ Copas, ♠ Espadas, ♦ Ouros). Não existe mais splash screen.
-- `/board` — tabuleiro principal: sorteio de quem começa, roleta de categoria, escolha do valor, fase de cartas e placar
-- `/question` — pergunta em si, com timer (já considerando os multiplicadores das cartas jogadas) e botões de "acertou/errou" operados pelo host
+- `/board` — tabuleiro principal: sorteio de quem começa, roleta de categoria, escolha do valor e placar
+- `/question` — pergunta em si, com timer e botões de "acertou/errou" operados pelo host
 
 Tudo é controlado manualmente pelo host em uma única tela/projetor (sem timers automáticos fora da resposta), como combinado.
 
@@ -71,13 +71,9 @@ As células do tabuleiro deixaram de ser hexágonos e viraram cards retangulares
 
 Todas as perguntas ficam em `src/app/data.json`, organizadas em 6 categorias (`din`, `jogos`, `musica`, `cinema`, `memes`, `geografia`) × 5 valores (200 a 1000). Os espaços em branco têm `"filled": false` — basta preencher `question`, `answer` (e `image`/`song`/`link` se for o caso) e trocar para `"filled": true`. Enquanto `filled` for `false`, a tela de pergunta mostra um aviso de "pergunta ainda não cadastrada" no lugar do texto.
 
-## Mecânica de cartas (J, Q, K, Coringa)
+## Mecânica do jogo
 
-Cada equipe tem 4 cartas. Ao jogar uma carta, a equipe escolhe o modo:
-- **Buff** (na rodada em que ela mesma vai responder): Valete (roleta de efeito positivo), Dama (fica imune a um debuff), Rei (só uma pessoa responde; acerto vale x3), Coringa (acerto vale x3, erro custa os pontos da pergunta).
-- **Debuff** (jogada por uma equipe adversária contra quem vai responder): Valete (roleta de efeito negativo), Dama (amplifica um debuff já ativo na rodada), Rei (a equipe adversária escolhe quem pode falar, o resto só faz mímica), Coringa (pontuação x2, mas tempo pela metade).
-
-Se a equipe que vai responder acertar, ela recupera aleatoriamente uma das próprias cartas já gastas. Os valores exatos das roletas (multiplicadores, bônus por velocidade, chance de repetir efeito de outra carta) estão documentados e ajustáveis em `src/lib/gameConfig.ts`.
+Tradicional, sem poderes: a equipe da vez gira a roleta de categoria, escolhe o valor da pergunta no tabuleiro e responde dentro do tempo. O host marca "acertou" (soma os pontos da pergunta ao placar da equipe) ou "errou" (nenhum ponto muda) e o jogo passa para a próxima equipe na ordem.
 
 ## Rodando localmente
 

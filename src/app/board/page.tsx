@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useGame } from "../../context/GameContext";
 import BoardGrid from "../../components/BoardGrid";
 import TeamPanel from "../../components/TeamPanel";
-import CardPhasePanel from "../../components/CardPhasePanel";
 import RouletteWheel from "../../components/RouletteWheel";
 import RouletteOverlay from "../../components/RouletteOverlay";
 import { CATEGORIES } from "../../lib/gameConfig";
@@ -30,7 +29,7 @@ export default function BoardPage() {
   const currentTeam = state.teams.find((t) => t.id === currentTeamId);
 
   const handleReset = () => {
-    if (confirm("Isso vai zerar todo o placar e as cartas. Continuar?")) {
+    if (confirm("Isso vai zerar todo o placar. Continuar?")) {
       dispatch({ type: "RESET_GAME" });
       router.push("/");
     }
@@ -130,14 +129,6 @@ export default function BoardPage() {
               </span>
             </p>
           </section>
-        )}
-
-        {state.phase === "card-phase" && (
-          <CardPhasePanel
-            state={state}
-            dispatch={dispatch}
-            onProceed={() => router.push("/question")}
-          />
         )}
 
         {state.phase === "answering" && (

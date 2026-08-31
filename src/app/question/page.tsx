@@ -12,9 +12,7 @@ export default function QuestionPage() {
   const router = useRouter();
 
   const [timeLeft, setTimeLeft] = useState<number | null>(null);
-  const [appliedTime, setAppliedTime] = useState<number | null>(null);
   const [showAnswer, setShowAnswer] = useState(false);
-  const [soloConfirmed, setSoloConfirmed] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const initializedRef = useRef(false);
@@ -22,16 +20,9 @@ export default function QuestionPage() {
   const question = state.currentQuestionId ? getQuestionById(state.currentQuestionId) : null;
   const youtubeEmbedUrl = question?.link ? getYoutubeEmbedUrl(question.link) : null;
 
-  const timeMultiplier = state.activeEffects.reduce((m, e) => m * (e.timeMultiplier ?? 1), 1);
-  const scoreMultiplier = state.activeEffects.reduce((m, e) => m * (e.scoreMultiplier ?? 1), 1);
-  const soloKingActive = state.activeEffects.some((e) => e.soloKing);
-  const jokerBuffActive = state.activeEffects.some((e) => e.jokerBuff);
-
   useEffect(() => {
     if (!question || initializedRef.current) return;
-    const t = Math.max(1, Math.round(question.time * timeMultiplier));
-    setAppliedTime(t);
-    setTimeLeft(t);
+    setTimeLeft(question.time);
     initializedRef.current = true;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [question]);
@@ -69,13 +60,7 @@ export default function QuestionPage() {
   };
 
   const resolve = (correct: boolean) => {
-    dispatch({
-      type: "ANSWER_RESULT",
-      correct,
-      secondsLeft: timeLeft ?? 0,
-      appliedTime: appliedTime ?? question.time,
-      soloConfirmed,
-    });
+    dispatch({ type: "ANSWER_RESULT", correct });
     router.push("/board");
   };
 
@@ -116,11 +101,6 @@ export default function QuestionPage() {
             <p className="font-display text-white text-3xl">
               TEMPO: {timeLeft ?? question.time} SEG
             </p>
-            {timeMultiplier !== 1 && (
-              <span className="font-body text-sm block text-white/70">
-                (base {question.time}s × {timeMultiplier.toFixed(2)})
-              </span>
-            )}
           </div>
 
           {showAnswer && question.filled && (
@@ -154,41 +134,6 @@ export default function QuestionPage() {
             </div>
           )}
         </div>
-
-        {state.activeEffects.length > 0 && (
-          <div className="stage-card bg-white p-4 flex flex-col gap-1">
-            {state.activeEffects.map((e) => (
-              <p key={e.id} className="font-body text-ink/70 text-sm">
-                • {e.label}
-              </p>
-            ))}
-            {scoreMultiplier !== 1 && (
-              <p className="font-body text-blue-primary text-sm font-semibold">
-                Multiplicador de pontuação total: x{scoreMultiplier.toFixed(2)}
-              </p>
-            )}
-            {jokerBuffActive && (
-              <p className="font-body text-blue-primary text-sm font-semibold">
-                Coringa ativo: acerto vale x3, erro custa os pontos da pergunta.
-              </p>
-            )}
-          </div>
-        )}
-
-        {soloKingActive && (
-          <div className="flex items-center gap-3 justify-center">
-            <input
-              id="solo"
-              type="checkbox"
-              checked={soloConfirmed}
-              onChange={(e) => setSoloConfirmed(e.target.checked)}
-              className="w-5 h-5 accent-blue-primary"
-            />
-            <label htmlFor="solo" className="font-body text-ink text-base">
-              O &quot;Rei&quot; respondeu sozinho, sem ajuda (aplica x3 se acertar)
-            </label>
-          </div>
-        )}
 
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           <button
