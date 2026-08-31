@@ -29,6 +29,8 @@ export function buildInitialState(): GameState {
     currentTeamIndex: 0,
     currentCategory: null,
     currentQuestionId: null,
+    answeringTeamId: null,
+    attemptedTeamIds: [],
     board: buildInitialBoard(),
     round: 0,
     log: [],
@@ -42,9 +44,41 @@ export type Action =
   | { type: "COMMIT_CATEGORY"; category: string }
   | { type: "PICK_QUESTION"; questionId: number }
   | { type: "ANSWER_RESULT"; correct: boolean }
+  | { type: "SELECT_STEAL_TEAM"; teamId: string }
+  | { type: "SKIP_STEAL" }
   | { type: "BACK_TO_BOARD" }
   | { type: "RESET_GAME" }
   | { type: "HYDRATE"; payload: GameState };
+
+// Metade do valor da pergunta, arredondada, usada quando uma equipe tenta "roubar"
+// a pergunta depois que outra equipe errou.
+function stealValue(points: number): number {
+  return Math.round(points / 2);
+}
+
+function closeQuestion(
+  state: GameState,
+  winningTeamId: string | null
+): GameState {
+  const nextIndex = (state.currentTeamIndex + 1) % state.order.length;
+  const newBoard = state.board.map((c) =>
+    c.id === state.currentQuestionId
+      ? { ...c, answered: true, winningTeamId }
+      : c
+  );
+  const allAnswered = newBoard.every((c) => c.answered);
+  return {
+    ...state,
+    board: newBoard,
+    currentCategory: null,
+    currentQuestionId: null,
+    answeringTeamId: null,
+    attemptedTeamIds: [],
+    currentTeamIndex: nextIndex,
+    round: state.round + 1,
+    phase: allAnswered ? "finished" : "spin-category",
+  };
+}
 
 function findTeam(state: GameState, teamId: string): Team {
   const t = state.teams.find((tm) => tm.id === teamId);
@@ -92,49 +126,82 @@ export function gameReducer(state: GameState, action: Action): GameState {
     }
 
     case "PICK_QUESTION": {
+      const answeringTeamId = state.order[state.currentTeamIndex];
       return {
         ...state,
         currentQuestionId: action.questionId,
+        answeringTeamId,
+        attemptedTeamIds: [],
         phase: "answering",
       };
     }
 
     case "ANSWER_RESULT": {
-      const currentTeamId = state.order[state.currentTeamIndex];
-      const team = findTeam(state, currentTeamId);
+      const answeringTeamId = state.answeringTeamId ?? state.order[state.currentTeamIndex];
+      const team = findTeam(state, answeringTeamId);
       const cell = (rawData.questions as any[]).find(
         (q) => q.id === state.currentQuestionId
       );
       const basePoints = cell ? cell.points : 0;
-      const scoreDelta = action.correct ? basePoints : 0;
+      const isSteal = state.attemptedTeamIds.length > 0;
+      const awardedPoints = isSteal ? stealValue(basePoints) : basePoints;
 
-      const newOrder = state.order;
-      const nextIndex = (state.currentTeamIndex + 1) % newOrder.length;
+      if (action.correct) {
+        const closed = closeQuestion(state, team.id);
+        return {
+          ...closed,
+          teams: state.teams.map((t) =>
+            t.id === team.id ? { ...t, score: t.score + awardedPoints } : t
+          ),
+          log: [
+            ...state.log,
+            isSteal
+              ? `${team.name} roubou a pergunta e ganhou ${awardedPoints} pontos.`
+              : `${team.name} acertou e ganhou ${awardedPoints} pontos.`,
+          ],
+        };
+      }
 
-      const newBoard = state.board.map((c) =>
-        c.id === state.currentQuestionId
-          ? { ...c, answered: true, winningTeamId: action.correct ? team.id : null }
-          : c
-      );
-      const allAnswered = newBoard.every((c) => c.answered);
+      // Resposta errada: verifica se sobra alguma equipe que ainda não tentou
+      const newAttempted = [...state.attemptedTeamIds, team.id];
+      const eligibleTeams = state.teams.filter((t) => !newAttempted.includes(t.id));
+
+      if (eligibleTeams.length === 0) {
+        const closed = closeQuestion(state, null);
+        return {
+          ...closed,
+          log: [
+            ...state.log,
+            `${team.name} errou. Nenhuma equipe pontuou nesta pergunta.`,
+          ],
+        };
+      }
 
       return {
         ...state,
-        board: newBoard,
-        teams: state.teams.map((t) =>
-          t.id === team.id ? { ...t, score: t.score + scoreDelta } : t
-        ),
-        currentCategory: null,
-        currentQuestionId: null,
-        currentTeamIndex: nextIndex,
-        round: state.round + 1,
-        phase: allAnswered ? "finished" : "spin-category",
+        attemptedTeamIds: newAttempted,
+        answeringTeamId: null,
+        phase: "steal-select",
         log: [
           ...state.log,
-          action.correct
-            ? `${team.name} acertou e ganhou ${scoreDelta} pontos.`
-            : `${team.name} errou.`,
+          isSteal ? `${team.name} errou a tentativa de roubo.` : `${team.name} errou.`,
         ],
+      };
+    }
+
+    case "SELECT_STEAL_TEAM": {
+      return {
+        ...state,
+        answeringTeamId: action.teamId,
+        phase: "answering",
+      };
+    }
+
+    case "SKIP_STEAL": {
+      const closed = closeQuestion(state, null);
+      return {
+        ...closed,
+        log: [...state.log, "Pergunta encerrada sem tentativa de roubo."],
       };
     }
 

@@ -27,6 +27,15 @@ export default function BoardPage() {
 
   const currentTeamId = state.order[state.currentTeamIndex];
   const currentTeam = state.teams.find((t) => t.id === currentTeamId);
+  const answeringTeam = state.answeringTeamId
+    ? state.teams.find((t) => t.id === state.answeringTeamId)
+    : null;
+  const activeTeamId = state.answeringTeamId ?? currentTeamId;
+  const currentCell = state.board.find((c) => c.id === state.currentQuestionId);
+  const isSteal = state.attemptedTeamIds.length > 0;
+  const eligibleStealTeams = state.teams.filter(
+    (t) => !state.attemptedTeamIds.includes(t.id)
+  );
 
   const handleReset = () => {
     if (confirm("Isso vai zerar todo o placar. Continuar?")) {
@@ -41,7 +50,7 @@ export default function BoardPage() {
         <div className="flex justify-center gap-4 flex-wrap w-full">
           {state.order.map((id) => {
             const team = state.teams.find((t) => t.id === id)!;
-            return <TeamPanel key={id} team={team} active={id === currentTeamId} />;
+            return <TeamPanel key={id} team={team} active={id === activeTeamId} />;
           })}
         </div>
 
@@ -133,12 +142,51 @@ export default function BoardPage() {
 
         {state.phase === "answering" && (
           <section className="w-full max-w-2xl flex flex-col items-center gap-6 stage-card bg-white p-10">
-            <p className="font-body text-ink text-xl text-center">A pergunta está em andamento.</p>
+            <p className="font-body text-ink text-xl text-center">
+              {isSteal && answeringTeam
+                ? `Tentativa de roubo: ${answeringTeam.naipe} ${answeringTeam.name} por ${
+                    currentCell ? Math.round(currentCell.points / 2) : ""
+                  } pts (metade do valor).`
+                : "A pergunta está em andamento."}
+            </p>
             <button
               onClick={() => router.push("/question")}
               className="font-display bg-blue-primary text-white text-xl px-8 py-3 rounded-full hover:scale-105 transition-transform"
             >
               Ir para a pergunta
+            </button>
+          </section>
+        )}
+
+        {state.phase === "steal-select" && (
+          <section className="w-full max-w-2xl flex flex-col items-center gap-6 stage-card bg-white p-8 sm:p-12 border-4 border-blue-primary/20">
+            <span className="font-body uppercase tracking-[0.25em] text-blue-primary text-xs">
+              Resposta errada
+            </span>
+            <p className="font-display text-blue-deepest text-2xl text-center">
+              Qual equipe vai tentar roubar por{" "}
+              {currentCell ? Math.round(currentCell.points / 2) : ""} pts?
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              {eligibleStealTeams.map((t) => (
+                <button
+                  key={t.id}
+                  onClick={() => {
+                    dispatch({ type: "SELECT_STEAL_TEAM", teamId: t.id });
+                    router.push("/question");
+                  }}
+                  className="font-display text-white text-lg px-6 py-3 rounded-full hover:scale-105 transition-transform shadow-card"
+                  style={{ backgroundColor: t.color }}
+                >
+                  {t.naipe} {t.name}
+                </button>
+              ))}
+            </div>
+            <button
+              onClick={() => dispatch({ type: "SKIP_STEAL" })}
+              className="font-body text-sm text-ink/50 hover:text-ink/80 underline underline-offset-2"
+            >
+              Ninguém tenta roubar, encerrar pergunta
             </button>
           </section>
         )}

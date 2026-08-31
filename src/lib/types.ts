@@ -4,6 +4,7 @@ export type Phase =
   | "spin-category"
   | "pick-question"
   | "answering"
+  | "steal-select"
   | "resolve"
   | "finished";
 
@@ -31,6 +32,8 @@ export interface GameState {
   currentTeamIndex: number; // index into order, whose turn it is to answer
   currentCategory: string | null;
   currentQuestionId: number | null;
+  answeringTeamId: string | null; // team currently attempting the active question (original or stealing)
+  attemptedTeamIds: string[]; // teams that already answered the active question incorrectly
   board: BoardCell[];
   round: number;
   log: string[];

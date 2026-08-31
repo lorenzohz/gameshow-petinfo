@@ -20,6 +20,12 @@ export default function QuestionPage() {
   const question = state.currentQuestionId ? getQuestionById(state.currentQuestionId) : null;
   const youtubeEmbedUrl = question?.link ? getYoutubeEmbedUrl(question.link) : null;
 
+  const isSteal = state.attemptedTeamIds.length > 0;
+  const answeringTeam = state.answeringTeamId
+    ? state.teams.find((t) => t.id === state.answeringTeamId)
+    : null;
+  const displayPoints = question ? (isSteal ? Math.round(question.points / 2) : question.points) : 0;
+
   useEffect(() => {
     if (!question || initializedRef.current) return;
     setTimeLeft(question.time);
@@ -72,7 +78,12 @@ export default function QuestionPage() {
             <span className="font-body uppercase tracking-[0.25em] text-blue-primary text-xs">
               {question.category.toUpperCase()}
             </span>
-            <h1 className="font-display text-blue-deepest text-3xl">{question.points} PTS</h1>
+            <h1 className="font-display text-blue-deepest text-3xl">{displayPoints} PTS</h1>
+            {isSteal && answeringTeam && (
+              <span className="font-body text-sm text-red-600 mt-1">
+                Tentativa de roubo — {answeringTeam.naipe} {answeringTeam.name} (metade do valor)
+              </span>
+            )}
           </div>
 
           <p className="font-display text-ink text-2xl md:text-4xl p-8 md:p-10 text-center">
@@ -108,6 +119,18 @@ export default function QuestionPage() {
               <p className="font-display text-emerald-600 text-2xl text-center">
                 Resposta: {question.answer}
               </p>
+
+              {question.answerImage && (
+                <div className="w-full max-w-lg rounded-xl overflow-hidden shadow-card">
+                  <Image
+                    src={question.answerImage}
+                    alt="Imagem da resposta"
+                    width={600}
+                    height={400}
+                    className="w-full h-auto object-contain"
+                  />
+                </div>
+              )}
 
               {question.link && (
                 youtubeEmbedUrl ? (

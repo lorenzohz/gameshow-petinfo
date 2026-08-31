@@ -73,7 +73,19 @@ Todas as perguntas ficam em `src/app/data.json`, organizadas em 6 categorias (`d
 
 ## Mecânica do jogo
 
-Tradicional, sem poderes: a equipe da vez gira a roleta de categoria, escolhe o valor da pergunta no tabuleiro e responde dentro do tempo. O host marca "acertou" (soma os pontos da pergunta ao placar da equipe) ou "errou" (nenhum ponto muda) e o jogo passa para a próxima equipe na ordem.
+Tradicional, sem poderes: a equipe da vez gira a roleta de categoria, escolhe o valor da pergunta no tabuleiro e responde dentro do tempo. O host marca "acertou" (soma os pontos da pergunta ao placar da equipe) ou "errou".
+
+Se a equipe errar, o jogo mostra uma tela pra escolher qual das outras equipes vai tentar "roubar" a pergunta, valendo metade dos pontos (arredondado). Isso se repete até alguém acertar ou até todas as equipes terem tentado — nesse caso a pergunta fecha sem ninguém pontuar. O host também pode encerrar a pergunta sem tentativa de roubo. Depois que a pergunta é resolvida (por acerto original, roubo ou sem ninguém acertar), o jogo segue normalmente para a próxima equipe na ordem original.
+
+## Imagem na resposta
+
+Além do embed de vídeo do YouTube (campo `link`), cada pergunta em `src/app/data.json` também tem um campo `answerImage`, que aceita um caminho de imagem para ser exibido junto com a resposta. As imagens devem ficar na pasta `public/respostas/` e o caminho no JSON deve começar com `/respostas/`, por exemplo:
+
+```json
+"answerImage": "/respostas/foto-resposta.png"
+```
+
+Deixe como `null` se a pergunta não tiver imagem de resposta.
 
 ## Rodando localmente
 
