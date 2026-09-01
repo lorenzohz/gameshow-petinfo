@@ -98,12 +98,6 @@ export default function QuestionPage() {
             </div>
           )}
 
-          {question.image && (
-            <div className="flex justify-center pb-6">
-              <Image src={question.image} alt="Imagem da pergunta" width={300} height={300} />
-            </div>
-          )}
-
           {question.song && (
             <div className="text-center pb-8">
               <button
@@ -127,6 +121,18 @@ export default function QuestionPage() {
               <p className="font-display text-emerald-600 text-2xl text-center">
                 Resposta: {question.answer}
               </p>
+
+              {question.image && (
+                <div className="w-full max-w-md rounded-xl overflow-hidden shadow-card flex justify-center">
+                  <Image
+                    src={question.image}
+                    alt="Imagem da pergunta"
+                    width={300}
+                    height={300}
+                    className="w-full h-auto object-contain"
+                  />
+                </div>
+              )}
 
               {question.answerImage && (
                 <div className="w-full max-w-lg rounded-xl overflow-hidden shadow-card">

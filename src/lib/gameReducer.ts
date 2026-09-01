@@ -214,7 +214,14 @@ export function gameReducer(state: GameState, action: Action): GameState {
     }
 
     case "HYDRATE": {
-      return action.payload;
+      // Estados salvos por versões anteriores do jogo (localStorage) podem não ter
+      // os campos novos — preenche com o padrão pra não quebrar o app.
+      return {
+        ...buildInitialState(),
+        ...action.payload,
+        answeringTeamId: action.payload.answeringTeamId ?? null,
+        attemptedTeamIds: action.payload.attemptedTeamIds ?? [],
+      };
     }
 
     default:
