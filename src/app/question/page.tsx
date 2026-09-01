@@ -13,6 +13,7 @@ export default function QuestionPage() {
 
   const [timeLeft, setTimeLeft] = useState<number | null>(null);
   const [showAnswer, setShowAnswer] = useState(false);
+  const [showHint, setShowHint] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const initializedRef = useRef(false);
@@ -25,6 +26,7 @@ export default function QuestionPage() {
     ? state.teams.find((t) => t.id === state.answeringTeamId)
     : null;
   const displayPoints = question ? (isSteal ? Math.round(question.points / 2) : question.points) : 0;
+  const hasHint = Boolean(question?.extra && question.extra.trim().length > 0);
 
   useEffect(() => {
     if (!question || initializedRef.current) return;
@@ -89,6 +91,12 @@ export default function QuestionPage() {
           <p className="font-display text-ink text-2xl md:text-4xl p-8 md:p-10 text-center">
             {question.filled ? question.question : "⚠️ Pergunta ainda não cadastrada — edite data.json"}
           </p>
+
+          {showHint && hasHint && (
+            <div className="mx-6 sm:mx-10 mb-6 rounded-xl bg-amber-50 border-2 border-amber-300 px-6 py-4 text-center">
+              <p className="font-body text-amber-700 text-lg">💡 {question.extra}</p>
+            </div>
+          )}
 
           {question.image && (
             <div className="flex justify-center pb-6">
@@ -159,6 +167,14 @@ export default function QuestionPage() {
         </div>
 
         <div className="flex flex-col sm:flex-row justify-center gap-4">
+          {hasHint && (
+            <button
+              onClick={() => setShowHint((s) => !s)}
+              className="font-body px-6 py-3 rounded-full border-2 border-amber-500 text-amber-600 hover:bg-amber-500 hover:text-white transition-colors"
+            >
+              {showHint ? "Esconder dica" : "💡 Ver dica"}
+            </button>
+          )}
           <button
             onClick={() => setShowAnswer((s) => !s)}
             className="font-body px-6 py-3 rounded-full border-2 border-blue-primary text-blue-primary hover:bg-blue-primary hover:text-white transition-colors"
