@@ -31,11 +31,15 @@ export default function BoardPage() {
     ? state.teams.find((t) => t.id === state.answeringTeamId)
     : null;
   const activeTeamId = state.answeringTeamId ?? currentTeamId;
-  const currentCell = state.board.find((c) => c.id === state.currentQuestionId);
-  const isSteal = state.attemptedTeamIds.length > 0;
-  const eligibleStealTeams = state.teams.filter(
-    (t) => !state.attemptedTeamIds.includes(t.id)
-  );
+const currentCell = state.board.find((c) => c.id === state.currentQuestionId);
+
+// Safely evaluate length; defaults to 0 if the array is undefined
+const isSteal = (state.attemptedTeamIds?.length ?? 0) > 0;
+
+const eligibleStealTeams = state.teams.filter(
+  // Provide an empty array fallback so .includes() always runs safely
+  (t) => !(state.attemptedTeamIds ?? []).includes(t.id)
+);
 
   const handleReset = () => {
     if (confirm("Isso vai zerar todo o placar. Continuar?")) {
