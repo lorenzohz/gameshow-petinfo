@@ -1,534 +1,1068 @@
 {
+
   "categories": [
+
     {
+
       "slug": "din",
+
       "label": "DIN"
+
     },
+
     {
+
       "slug": "jogos",
+
       "label": "Jogos"
+
     },
+
     {
+
       "slug": "musica",
+
       "label": "Música"
+
     },
+
     {
+
       "slug": "cinema",
+
       "label": "Cinema"
+
     },
+
     {
+
       "slug": "memes",
+
       "label": "Memes"
+
     },
+
     {
+
       "slug": "geografia",
+
       "label": "Geografia"
+
     }
+
   ],
+
   "questions": [
+
     {
+
       "id": 1,
+
       "category": "din",
+
       "points": 200,
-      "question": "O que significa a sigla PET?",
-      "answer": "Programa de Educação Tutorial",
-      "extra": "Dica: Foco na vivência universitária.",
+
+      "question": "O que está pendurado indicando os andares no departamento?",
+
+      "answer": "Placa-Mãe",
+
+      "extra": "",
+
       "time": 60,
+
       "song": null,
+
       "image": null,
+
       "link": null,
+
       "filled": true,
+
       "answerImage": null
+
     },
+
     {
+
       "id": 2,
+
       "category": "din",
+
       "points": 400,
-      "question": "Em qual bloco da UEM fica localizada a sala do PET Informática e do DIN?",
-      "answer": "Bloco C56",
+
+      "question": "O que é proibido de fazer na sala do pet?",
+
+      "answer": "Farmar Aura!!!",
+
       "extra": "",
+
       "time": 60,
+
       "song": null,
-      "image": null,
+
+      "image": "/respostas/aura.jpg",
+
       "link": null,
+
       "filled": true,
+
       "answerImage": null
+
     },
+
     {
+
       "id": 3,
+
       "category": "din",
+
       "points": 600,
-      "question": "Quais são os 3 pilares de sustentação de todas as atividades do PET?",
-      "answer": "Ensino, Pesquisa e Extensão",
+
+      "question": "O que o vitor e o fratus roubaram do CAUDIN?",
+
+      "answer": "As cadeiras.",
+
       "extra": "",
+
       "time": 75,
+
       "song": null,
-      "image": null,
+
+      "image": "/respostas/caudin.png",
+
       "link": null,
+
       "filled": true,
+
       "answerImage": null
+
     },
+
     {
+
       "id": 4,
+
       "category": "din",
+
       "points": 800,
-      "question": "O PET Informática é historicamente formado por estudantes de quais dois cursos do departamento?",
-      "answer": "Ciência da Computação e Informática",
+
+      "question": "Qual o personagem favorito do nardênio de Star Wars?",
+
+      "answer": "É o GROGU",
+
       "extra": "",
+
       "time": 75,
+
       "song": null,
-      "image": null,
+
+      "image": "/respostas/grogu.png",
+
       "link": null,
+
       "filled": true,
+
       "answerImage": null
+
     },
+
     {
+
       "id": 5,
+
       "category": "din",
+
       "points": 1000,
-      "question": "O animal frequentemente associado como mascote não oficial dos alunos da UEM (e que habita o campus) é a...",
-      "answer": "Capivara",
+
+      "question": "Qual jacoposter está colado até hoje no departamento?",
+
+      "answer": "Jacoamor",
+
       "extra": "",
+
       "time": 90,
+
       "song": null,
-      "image": null,
+
+      "image": "/respostas/jacoamor.png",
+
       "link": null,
+
       "filled": true,
+
       "answerImage": null
+
     },
+
     {
+
       "id": 6,
+
       "category": "jogos",
+
       "points": 200,
-      "question": "Qual é o jogo mais vendido de todos os tempos?",
-      "answer": "Minecraft",
+
+      "question": "Quem é o mago dos jogos?",
+
+      "answer": "Davy Jones",
+
       "extra": "",
+
       "time": 60,
+
       "song": null,
+
       "image": null,
+
       "link": null,
+
       "filled": true,
+
       "answerImage": null
+
     },
+
     {
+
       "id": 7,
+
       "category": "jogos",
+
       "points": 400,
-      "question": "Em qual franquia de jogos o protagonista é frequentemente alertado por um NPC com a frase 'Hey, Listen!'?",
-      "answer": "The Legend of Zelda (Ocarina of Time)",
-      "extra": "Personagem: Navi",
+
+      "question": "Qual jogo é conhecido por ter uma comunidade extremamente preocupada com realismo?",
+
+      "answer": "Red Dead Redemption 2",
+
+      "extra": "",
+
       "time": 60,
+
       "song": null,
+
       "image": null,
+
       "link": null,
+
       "filled": true,
+
       "answerImage": null
+
     },
+
     {
+
       "id": 8,
+
       "category": "jogos",
+
       "points": 600,
-      "question": "Qual é a icônica frase escrita em sangue nas paredes de Left 4 Dead?",
-      "answer": "God is Dead (ou outras mensagens clássicas da safe room)",
-      "extra": "Aceitar menções às frases da safe room.",
+
+      "question": "Qual foi a engine utilizada para o desenvolvimento de Undertale?",
+
+      "answer": "GameMaker",
+
+      "extra": "",
+
       "time": 75,
+
       "song": null,
+
       "image": null,
+
       "link": null,
+
       "filled": true,
+
       "answerImage": null
+
     },
+
     {
+
       "id": 9,
+
       "category": "jogos",
+
       "points": 800,
-      "question": "A famosa frase 'The cake is a lie' é um easter egg encontrado em qual jogo?",
-      "answer": "Portal",
+
+      "question": "Em qual jogo a experiência padrão consiste em ver o mundo coberto de quadrados rosa e pretos, ser espancado por um letreiro vermelho gigante de \"\\ERROR\" porque você não tem outro jogo completamente diferente instalado?",
+
+      "answer": "Garry's Mod",
+
       "extra": "",
+
       "time": 75,
+
       "song": null,
+
       "image": null,
+
       "link": null,
+
       "filled": true,
+
       "answerImage": null
+
     },
+
     {
+
       "id": 10,
+
       "category": "jogos",
+
       "points": 1000,
-      "question": "Em The Witcher 3, qual é o nome do cavalo de Geralt na versão dublada em PT-BR?",
-      "answer": "Carpeado",
+
+      "question": "Como são chamados os personagens que tradicionalmente trabalham para os vilões? (inglês)",
+
+      "answer": "Goons",
+
       "extra": "",
+
       "time": 90,
+
       "song": null,
+
       "image": null,
+
       "link": null,
+
       "filled": true,
+
       "answerImage": null
+
     },
+
     {
+
       "id": 11,
+
       "category": "musica",
+
       "points": 200,
-      "question": "Qual artista é mundialmente conhecido como o 'Rei do Pop'?",
-      "answer": "Michael Jackson",
+
+      "question": "Qual banda iniciou o movimento conhecido por Invasão Britânica?",
+
+      "answer": "The Beatles",
+
       "extra": "",
+
       "time": 60,
+
       "song": null,
+
       "image": null,
+
       "link": null,
+
       "filled": true,
+
       "answerImage": null
+
     },
+
     {
+
       "id": 12,
+
       "category": "musica",
+
       "points": 400,
-      "question": "Qual icônica banda de rock possui um prisma refratando luz em sua capa mais famosa?",
-      "answer": "Pink Floyd (The Dark Side of the Moon)",
+
+      "question": "Qual desses NÂO é uma banda brasileira indie real?\nA) a casa mais estranha não tem número \nB) a terra vai se tornar um planeta inabitável \nC) eu esqueci de regar as suculentas \nD) sophia chablau e uma enorme perda de tempo ",
+
+      "answer": "C) eu esqueci de regar as suculentas",
+
       "extra": "",
+
       "time": 60,
+
       "song": null,
+
       "image": null,
+
       "link": null,
+
       "filled": true,
+
       "answerImage": null
+
     },
+
     {
+
       "id": 13,
+
       "category": "musica",
+
       "points": 600,
-      "question": "De qual país é originária a banda de metal Rammstein?",
-      "answer": "Alemanha",
+
+      "question": "Qual é a banda mais conhecida da Suécia?",
+
+      "answer": "ABBA",
+
       "extra": "",
+
       "time": 75,
+
       "song": null,
+
       "image": null,
+
       "link": null,
+
       "filled": true,
+
       "answerImage": null
+
     },
+
     {
+
       "id": 14,
+
       "category": "musica",
+
       "points": 800,
-      "question": "Quem compôs a épica trilha sonora do filme Interestelar?",
-      "answer": "Hans Zimmer",
+
+      "question": "Ao invés de ligar pros bombeiros eu sem querer liguei pros…",
+
+      "answer": "Foo Fighters",
+
       "extra": "",
+
       "time": 75,
+
       "song": null,
+
       "image": null,
-      "link": null,
+
+      "link": "https://music.youtube.com/watch?v=EqWRaAF6_WY&si=1uueh7FYH0BPgNSw",
+
       "filled": true,
+
       "answerImage": null
+
     },
+
     {
+
       "id": 15,
+
       "category": "musica",
+
       "points": 1000,
-      "question": "Qual rapper contemporâneo lançou o aclamado álbum 'To Pimp a Butterfly'?",
-      "answer": "Kendrick Lamar",
+
+      "question": "Qual banda toca desde antes de cristo até depois de cristo?",
+
+      "answer": "AC/DC",
+
       "extra": "",
+
       "time": 90,
+
       "song": null,
+
       "image": null,
+
       "link": null,
+
       "filled": true,
+
       "answerImage": null
+
     },
+
     {
+
       "id": 16,
+
       "category": "cinema",
+
       "points": 200,
-      "question": "Qual a primeira regra do Clube da Luta?",
-      "answer": "Você não fala sobre o Clube da Luta",
+
+      "question": "Hulk __ e Tá na hora do __ são as frases icônicas desses “rivais” da Marvel.",
+
+      "answer": "Esmaga e Pau.",
+
       "extra": "",
+
       "time": 60,
+
       "song": null,
+
       "image": null,
+
       "link": null,
+
       "filled": true,
+
       "answerImage": null
+
     },
+
     {
+
       "id": 17,
+
       "category": "cinema",
+
       "points": 400,
-      "question": "No universo de Matrix, qual cor de pílula Neo escolhe tomar para descobrir a verdade?",
-      "answer": "Vermelha",
+
+      "question": "Só quem é fã de Star Wars?",
+
+      "answer": "vai se foder!!!!",
+
       "extra": "",
+
       "time": 60,
+
       "song": null,
-      "image": null,
+
+      "image": "/respostas/starwars.png",
+
       "link": null,
+
       "filled": true,
+
       "answerImage": null
+
     },
+
     {
+
       "id": 18,
+
       "category": "cinema",
+
       "points": 600,
-      "question": "Qual filme venceu o Oscar inédito de Melhor Animação na sua estreia como categoria no ano de 2002?",
-      "answer": "Shrek",
+
+      "question": "Qual a saga/trilogia com a maior quantidade de oscars?",
+
+      "answer": "O Senhor dos Anéis",
+
       "extra": "",
+
       "time": 75,
+
       "song": null,
+
       "image": null,
+
       "link": null,
+
       "filled": true,
+
       "answerImage": null
+
     },
+
     {
+
       "id": 19,
+
       "category": "cinema",
+
       "points": 800,
-      "question": "Quem é o diretor dos filmes Pulp Fiction e Kill Bill?",
-      "answer": "Quentin Tarantino",
+
+      "question": "Um erro de coreografia causou uma mudança no pôster do filme. Qual filme é esse e qual foi o erro?",
+
+      "answer": "A mão do ator Ryan Gosling não ficou estendida, mas sim curvada no pôster do filme La La Land: Cantando Estações.",
+
       "extra": "",
+
       "time": 75,
+
       "song": null,
-      "image": null,
+
+      "image": "/respostas/lalaland.png",
+
       "link": null,
+
       "filled": true,
+
       "answerImage": null
+
     },
+
     {
+
       "id": 20,
+
       "category": "cinema",
+
       "points": 1000,
-      "question": "Em 'O Iluminado' (The Shining), qual palavra assustadora o menino Danny escreve na porta?",
-      "answer": "REDRUM (Murder ao contrário)",
+
+      "question": "Quantos OSCARs Leonardo DiCaprio ganhou?",
+
+      "answer": "1",
+
       "extra": "",
+
       "time": 90,
+
       "song": null,
+
       "image": null,
+
       "link": null,
+
       "filled": true,
+
       "answerImage": null
+
     },
+
     {
+
       "id": 21,
+
       "category": "memes",
+
       "points": 200,
-      "question": "A adolescente Luíza, que virou meme nacional, estava viajando para qual país enquanto sua família gravava um comercial?",
-      "answer": "Canadá",
-      "extra": "Meme: 'Menos a Luíza, que está no...'",
+
+      "question": "Quem é Triple T?",
+
+      "answer": "Tung Tung Tung Sahur",
+
+      "extra": "",
+
       "time": 60,
+
       "song": null,
-      "image": null,
+
+      "image": "/respostas/triplet.png",
+
       "link": null,
+
       "filled": true,
+
       "answerImage": null
+
     },
+
     {
+
       "id": 22,
+
       "category": "memes",
+
       "points": 400,
-      "question": "Qual é a raça do famoso cachorro caramelo do meme Doge (e da criptomoeda)?",
-      "answer": "Shiba Inu",
-      "extra": "",
+
+      "question": "O que caiu em cima da Giovanna?",
+
+      "answer": "O forninho",
+
+      "extra": "dica: “Eita Giovanna” ou “Mãeee, o forninho caiu”",
+
       "time": 60,
+
       "song": null,
+
       "image": null,
-      "link": null,
+
+      "link": "https://www.youtube.com/watch?v=kbwqx4CjbyU&pp=ygUXZ2lvdmFuYSBvIGZvcm5pbmhvIGNhaXU%3D",
+
       "filled": true,
+
       "answerImage": null
+
     },
+
     {
+
       "id": 23,
+
       "category": "memes",
+
       "points": 600,
-      "question": "Complete a frase do meme que estourou no TikTok: 'Bora Bill! Bora...'",
-      "answer": "Fi do Bill (ou Mulher do Bill)",
-      "extra": "",
+
+      "question": "Qual o melhor meme do mundo?",
+
+      "answer": "Trollface",
+
+      "extra": "Adicional: “Ele é mais ou menos assim ;D”",
+
       "time": 75,
+
       "song": null,
+
       "image": null,
-      "link": null,
+
+      "link": "https://youtu.be/Dhxv4qHcGx4",
+
       "filled": true,
+
       "answerImage": null
+
     },
+
     {
+
       "id": 24,
+
       "category": "memes",
+
       "points": 800,
-      "question": "Qual é o apelido do chef turco Nusret Gökçe, que virou meme ao jogar sal na carne de um jeito peculiar?",
-      "answer": "Salt Bae",
+
+      "question": "Qual o novo projeto colaborativo entre o Sírio Libanês, Multilaser tech e Positivo Labs Systems?",
+
+      "answer": "Luís Inácio Droid da Silva",
+
       "extra": "",
+
       "time": 75,
+
       "song": null,
+
       "image": null,
-      "link": null,
+
+      "link": "https://youtu.be/3VXOyzIO32I",
+
       "filled": true,
+
       "answerImage": null
+
     },
+
     {
+
       "id": 25,
+
       "category": "memes",
+
       "points": 1000,
-      "question": "No clássico meme brasileiro do 'Mamilos', eles são considerados o quê?",
-      "answer": "Mamilos são muito polêmicos",
-      "extra": "",
+
+      "question": "Qual foi a promessa feita a mim mesmo?",
+
+      "answer": "Nunca mais comer torresmo",
+
+      "extra": "Adicional: “Me dá um real”",
+
       "time": 90,
+
       "song": null,
+
       "image": null,
-      "link": "https://www.youtube.com/watch?v=1xN8gYI59B0",
+
+      "link": "https://www.youtube.com/watch?v=mRzRvOJZoZk",
+
       "filled": true,
+
       "answerImage": null
+
     },
+
     {
+
       "id": 26,
+
       "category": "geografia",
+
       "points": 200,
-      "question": "Qual é o menor país do mundo?",
-      "answer": "Vaticano",
-      "extra": "",
+
+      "question": "De que país originalmente veio o Ceviche?",
+
+      "answer": "Peru",
+
+      "extra": "Dica: América do Sul",
+
       "time": 60,
+
       "song": null,
+
       "image": null,
+
       "link": null,
+
       "filled": true,
+
       "answerImage": null
+
     },
+
     {
+
       "id": 27,
+
       "category": "geografia",
+
       "points": 400,
-      "question": "Qual é a capital da Austrália?",
-      "answer": "Camberra",
-      "extra": "",
+
+      "question": "Qual a capital do vestuário (Cidade no Paraná)?",
+
+      "answer": "Cianorte",
+
+      "extra": "Dica: fica perto de Maringá (menos de 100km)",
+
       "time": 60,
+
       "song": null,
+
       "image": null,
+
       "link": null,
+
       "filled": true,
+
       "answerImage": null
+
     },
+
     {
+
       "id": 28,
+
       "category": "geografia",
+
       "points": 600,
-      "question": "Qual cordilheira é tradicionalmente usada como fronteira natural para separar a Europa da Ásia?",
-      "answer": "Montes Urais",
+
+      "question": "Cite 7 países que fazem fronteira com o Brasil.",
+
+      "answer": "Argentina, Bolívia, Colômbia, Guiana, Guiana Francesa, Paraguai, Peru, Suriname ou Venezuela.",
+
       "extra": "",
+
       "time": 75,
+
       "song": null,
+
       "image": null,
+
       "link": null,
+
       "filled": true,
+
       "answerImage": null
+
     },
+
     {
+
       "id": 29,
+
       "category": "geografia",
+
       "points": 800,
-      "question": "Em qual país da América do Sul está localizado o Deserto do Atacama?",
-      "answer": "Chile",
+
+      "question": "Cite uma das constelações presentes na bandeira do Brasil.",
+
+      "answer": "Cruzeiro do Sul, Escorpião, Cão Maior, Cão Menor, Triângulo Austral, Hidra Fêmea, Virgem, Carina ou Oitante.",
+
       "extra": "",
+
       "time": 75,
+
       "song": null,
+
       "image": null,
+
       "link": null,
+
       "filled": true,
+
       "answerImage": null
+
     },
+
     {
+
       "id": 30,
+
       "category": "geografia",
+
       "points": 1000,
-      "question": "Quais são os únicos DOIS países da América do Sul que NÃO possuem saída para o mar (landlocked)?",
-      "answer": "Bolívia e Paraguai",
-      "extra": "",
+
+      "question": "Quais as 3 cidades com a maior quantidade de estrelas Michelin?",
+
+      "answer": "Tóquio, Paris e Quioto",
+
+      "extra": "Dica: duas delas são do mesmo país.",
+
       "time": 90,
+
       "song": null,
+
       "image": null,
+
       "link": null,
+
       "filled": true,
+
       "answerImage": null
+
     },
+
     {
+
       "id": 31,
+
       "category": "din",
+
       "points": 2000,
-      "question": "Quantas horas semanais um bolsista padrão do PET Informática deve dedicar obrigatoriamente às atividades do programa?",
-      "answer": "20 horas",
+
+      "question": "Quantas jacopáginas originalmente foram distribuidas pelo departamento?",
+
+      "answer": "10, La Jacocasa de Jacopapel, Jaconcentrado, Jacoamigos, Jacocansaço, Jacofamilia, Jacobrothers, Jacomeno, Jacoamor, Jacosono e Jacozoom.",
+
       "extra": "",
+
       "time": 60,
+
       "song": null,
+
       "image": null,
+
       "link": null,
+
       "filled": true,
+
       "answerImage": null
+
     },
+
     {
+
       "id": 32,
+
       "category": "jogos",
+
       "points": 2000,
-      "question": "Em que ano ocorreu o infame 'Crash dos Videogames' que quase destruiu a indústria no Ocidente?",
-      "answer": "1983",
+
+      "question": "Quantos pulos são necessários para finalizar o jogo Celeste?",
+
+      "answer": "59 Pulos",
+
       "extra": "",
+
       "time": 60,
+
       "song": null,
+
       "image": null,
+
       "link": null,
+
       "filled": true,
+
       "answerImage": null
+
     },
+
     {
+
       "id": 33,
+
       "category": "musica",
+
       "points": 2000,
-      "question": "Qual foi o primeiro videoclipe transmitido na história da MTV, no ano de 1981?",
-      "answer": "Video Killed the Radio Star (The Buggles)",
+
+      "question": "Qual a duração do álbum Immunity da Clairo?",
+
+      "answer": "40 minutos e 39 segundos",
+
       "extra": "",
+
       "time": 60,
+
       "song": null,
+
       "image": null,
+
       "link": null,
+
       "filled": true,
+
       "answerImage": null
+
     },
+
     {
+
       "id": 34,
+
       "category": "cinema",
+
       "points": 2000,
-      "question": "Qual foi o primeiro longa-metragem de animação tradicional colorido da história do cinema (1937)?",
-      "answer": "Branca de Neve e os Sete Anões",
+
+      "question": "Quantas mortes acontecem no filme Carros 2?",
+
+      "answer": "19 mortes (17 mostradas)",
+
       "extra": "",
+
       "time": 60,
+
       "song": null,
+
       "image": null,
+
       "link": null,
+
       "filled": true,
+
       "answerImage": null
+
     },
+
     {
+
       "id": 35,
+
       "category": "memes",
+
       "points": 2000,
-      "question": "Em que ano o lendário vídeo amador 'Charlie bit my finger - again!' foi originalmente postado no YouTube?",
-      "answer": "2007",
+
+      "question": "Quantas publicaçõestem o perfil da South America Memes no instagram?",
+
+      "answer": "1810",
+
       "extra": "",
+
       "time": 60,
+
       "song": null,
+
       "image": null,
+
       "link": null,
+
       "filled": true,
+
       "answerImage": null
+
     },
+
     {
+
       "id": 36,
+
       "category": "geografia",
+
       "points": 2000,
-      "question": "Qual é a nação com a maior população do continente africano?",
-      "answer": "Nigéria",
+
+      "question": "Quais os 12 animais do zodíaco Chinês?",
+
+      "answer": "Rato, Boi, Tigre, Coelho, Dragão, Serpente, Cavalo, Cabra, Macaco, Galo, Cão e Porco",
+
       "extra": "",
+
       "time": 60,
+
       "song": null,
+
       "image": null,
+
       "link": null,
+
       "filled": true,
+
       "answerImage": null
+
     }
+
   ]
+
 }
+
