@@ -451,13 +451,13 @@
       "category": "din",
       "points": 2000,
       "question": "Quantas jacopáginas originalmente foram distribuidas pelo departamento?",
-      "answer": "10",
+      "answer": "10, La Jacocasa de Jacopapel, Jaconcentrado, Jacoamigos, Jacocansaço, Jacofamilia, Jacobrothers, Jacomeno, Jacoamor, Jacosono e Jacozoom.",
       "extra": "",
       "time": 60,
       "song": null,
       "image": null,
       "link": null,
-      "filled": false,
+      "filled": true,
       "answerImage": null
     },
     {
@@ -471,7 +471,7 @@
       "song": null,
       "image": null,
       "link": null,
-      "filled": false,
+      "filled": true,
       "answerImage": null
     },
     {
@@ -485,7 +485,7 @@
       "song": null,
       "image": null,
       "link": null,
-      "filled": false,
+      "filled": true,
       "answerImage": null
     },
     {
@@ -499,7 +499,7 @@
       "song": null,
       "image": null,
       "link": null,
-      "filled": false,
+      "filled": true,
       "answerImage": null
     },
     {
@@ -513,7 +513,7 @@
       "song": null,
       "image": null,
       "link": null,
-      "filled": false,
+      "filled": true,
       "answerImage": null
     },
     {
@@ -527,7 +527,7 @@
       "song": null,
       "image": null,
       "link": null,
-      "filled": false,
+      "filled": true,
       "answerImage": null
     }
   ]
