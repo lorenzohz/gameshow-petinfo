@@ -96,11 +96,9 @@ export function gameReducer(state: GameState, action: Action): GameState {
         ),
       };
     }
-
     case "START_GAME": {
       return { ...state, phase: "draw-start" };
     }
-
     case "DRAW_STARTING_TEAM": {
       const startIdx = NAIPE_ORDER.indexOf(action.teamId);
       const order = [
@@ -116,7 +114,6 @@ export function gameReducer(state: GameState, action: Action): GameState {
         log: [...state.log, `Equipe sorteada para começar: ${action.teamId}`],
       };
     }
-
     case "COMMIT_CATEGORY": {
       return {
         ...state,
@@ -124,7 +121,6 @@ export function gameReducer(state: GameState, action: Action): GameState {
         phase: "pick-question",
       };
     }
-
     case "PICK_QUESTION": {
       const answeringTeamId = state.order[state.currentTeamIndex];
       return {
@@ -135,7 +131,6 @@ export function gameReducer(state: GameState, action: Action): GameState {
         phase: "answering",
       };
     }
-
     case "ANSWER_RESULT": {
       const answeringTeamId = state.answeringTeamId ?? state.order[state.currentTeamIndex];
       const team = findTeam(state, answeringTeamId);
@@ -188,7 +183,6 @@ export function gameReducer(state: GameState, action: Action): GameState {
         ],
       };
     }
-
     case "SELECT_STEAL_TEAM": {
       return {
         ...state,
@@ -196,7 +190,6 @@ export function gameReducer(state: GameState, action: Action): GameState {
         phase: "answering",
       };
     }
-
     case "SKIP_STEAL": {
       const closed = closeQuestion(state, null);
       return {
@@ -204,32 +197,39 @@ export function gameReducer(state: GameState, action: Action): GameState {
         log: [...state.log, "Pergunta encerrada sem tentativa de roubo."],
       };
     }
-
     case "BACK_TO_BOARD": {
       return { ...state, phase: "spin-category" };
     }
-
     case "RESET_GAME": {
       return buildInitialState();
     }
-
     case "HYDRATE": {
-      // Estados salvos por versões anteriores do jogo (localStorage) podem não ter
-      // os campos novos — preenche com o padrão pra não quebrar o app.
+      // Cria o tabuleiro atualizado a partir do data.json
+      const initialBoard = buildInitialState().board;
+      
+      // Mescla o progresso salvo (respondidas/vencedores) com o tabuleiro atualizado
+      const hydratedBoard = initialBoard.map(initialCell => {
+        const savedCell = action.payload.board?.find(c => c.id === initialCell.id);
+        return savedCell 
+          ? { ...initialCell, answered: savedCell.answered, winningTeamId: savedCell.winningTeamId } 
+          : initialCell;
+      });
+
       return {
         ...buildInitialState(),
         ...action.payload,
+        board: hydratedBoard, // Utiliza o tabuleiro mesclado em vez de apenas sobrescrever
         answeringTeamId: action.payload.answeringTeamId ?? null,
         attemptedTeamIds: action.payload.attemptedTeamIds ?? [],
       };
     }
-
     default:
       return state;
   }
 }
 
 export { buildInitialBoard };
+
 export const ALL_CATEGORIES = CATEGORIES.map((c) => c.slug);
 export const ALL_POINTS = POINTS_VALUES;
 
